@@ -4,9 +4,8 @@
 
 from functools import reduce
 from operator import add
-from urllib import parse
 
-APK_VERSION = '6.68.1'
+__apk_version__ = '6.68.1'
 
 
 def bytes_to_int32(t):
@@ -575,29 +574,3 @@ def get_sign(path='', params='', xy_common_params='', xy_platform_info='', data=
 
     sign = bytes(t2[12:]).decode('utf-8')
     return sign
-
-
-def test():
-    # 对接口路径、url参数、header中的xy-common-params、xy-platform-info、请求的data进行签名
-    path = '/api/sns/v4/note/user/posted'
-
-    params = parse.urlencode({'user_id': '5eeb209d000000000101d84a'})
-
-    xy_common_params = parse.urlencode({})
-
-    xy_platform_info = parse.urlencode({})
-
-    data = parse.urlencode({})
-
-    # 生成签名
-    sign = get_sign(path=path,
-                    params=params,
-                    xy_common_params=xy_common_params,
-                    xy_platform_info=xy_platform_info,
-                    data=data)
-
-    print(sign)
-
-
-if __name__ == '__main__':
-    test()
